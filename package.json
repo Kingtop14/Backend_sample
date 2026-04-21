@@ -1,0 +1,23 @@
+{
+  "name": "backend_sample",
+  "version": "1.0.0",
+  "description": "a sample project",
+  "homepage": "https://github.com/Kingtop14/Backend_sample#readme",
+  "bugs": {
+    "url": "https://github.com/Kingtop14/Backend_sample/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kingtop14/Backend_sample.git"
+  },
+  "license": "ISC",
+  "author": "Oladapo precious",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
