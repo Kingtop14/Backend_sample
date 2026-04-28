@@ -15,7 +15,7 @@ const userSchema = new Schema({
             type: String,
             required: true,
             minlength: 6,
-            maxlength: 30,
+            maxlength: 100,
         },
         email: {
             type: String,
@@ -41,7 +41,20 @@ userSchema.pre("save", async function () {
 
 // Method to compare password
 userSchema.methods.comparePassword = async function (Password) {
-    return await bcrypt.compare(Password, this.password);
+    const isMatch = await bcrypt.compare(Password, this.password);
+    if (isMatch) {
+        return true;
+    }
+
+    // Legacy support: if the stored password is plaintext from before hashing,
+    // allow login and upgrade the stored password to a bcrypt hash.
+    if (Password === this.password) {
+        this.password = await bcrypt.hash(Password, 10);
+        await this.save();
+        return true;
+    }
+
+    return false;
 };
 export const User = mongoose.model("User", userSchema);
 
